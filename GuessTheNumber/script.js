@@ -4,12 +4,16 @@ let secretNumber = Math.trunc(Math.random() * 21);
 let count = 20;
 let highscore = 0;
 
+const displayMessage = function(message){
+    document.querySelector(".message").textContent = message;
+}
+
 let checkButtonFunction = function() {
   let guess = Number(document.querySelector(".guess").value);
   if (!guess) {
-    document.querySelector(".message").textContent = " 🛑 Enter a number";
+    displayMessage(" 🛑 Enter a number")
   } else if (guess === secretNumber) {
-    document.querySelector(".message").textContent = "🎉 Correct Guess";
+    displayMessage = "🎉 Correct Guess"
     document.querySelector(".number").textContent = secretNumber;
     document.querySelector("body").style.backgroundColor = "#60b347";
     document.querySelector(".number").style.width = "30rem";
@@ -20,12 +24,11 @@ let checkButtonFunction = function() {
     }
   } else if (guess !== secretNumber) {
     if (count > 1) {
-      document.querySelector(".message").textContent =
-        guess > secretNumber ? " 📈 Too High" : " 📉Too Low";
+      displayMessage(guess > secretNumber ? " 📈 Too High" : " 📉Too Low")
       count--;
       document.querySelector(".score").textContent = count;
     } else {
-      document.querySelector(".message").textContent = "💥 You lost ";
+        displayMessage("💥 You lost ")
     }
   }
 };
@@ -37,7 +40,7 @@ let againFunction = function() {
   document.querySelector(".guess").value = "";
   document.querySelector(".number").style.width = "15rem";
   document.querySelector("body").style.backgroundColor = "#222";
-  document.querySelector(".message").textContent = "Start guessing..";
+  displayMessage("Start guessing..")
   document.querySelector(".score").textContent = count;
 };
 
