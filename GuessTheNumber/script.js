@@ -1,38 +1,31 @@
-'use strict';
+"use strict";
 
 let secretNumber = Math.trunc(Math.random() * 21);
 let count = 20;
 let highscore = 0;
 
 let checkButtonFunction = function() {
-  let guess = Number(document.querySelector('.guess').value);
+  let guess = Number(document.querySelector(".guess").value);
   if (!guess) {
-    document.querySelector('.message').textContent = ' 🛑 Enter a number';
+    document.querySelector(".message").textContent = " 🛑 Enter a number";
   } else if (guess === secretNumber) {
-    document.querySelector('.message').textContent = '🎉 Correct Guess';
-    document.querySelector('.number').textContent = secretNumber;
-    document.querySelector('body').style.backgroundColor = '#60b347';
-    document.querySelector('.number').style.width = '30rem';
+    document.querySelector(".message").textContent = "🎉 Correct Guess";
+    document.querySelector(".number").textContent = secretNumber;
+    document.querySelector("body").style.backgroundColor = "#60b347";
+    document.querySelector(".number").style.width = "30rem";
 
-    if (count > highscore){
-        highscore = count;
-        document.querySelector('.highscore').textContent = highscore;
+    if (count > highscore) {
+      highscore = count;
+      document.querySelector(".highscore").textContent = highscore;
     }
-  } else if (guess > secretNumber) {
-    if (count > 0) {
-      document.querySelector('.message').textContent = ' 📈 Too High';
+  } else if (guess !== secretNumber) {
+    if (count > 1) {
+      document.querySelector(".message").textContent =
+        guess > secretNumber ? " 📈 Too High" : " 📉Too Low";
       count--;
-      document.querySelector('.score').textContent = count;
+      document.querySelector(".score").textContent = count;
     } else {
-      document.querySelector('.message').textContent = '💥 You lost ';
-    }
-  } else {
-    if (count > 0) {
-      document.querySelector('.message').textContent = ' 📉Too Low';
-      count--;
-      document.querySelector('.score').textContent = count;
-    } else {
-      document.querySelector('.message').textContent = '💥 You lost ';
+      document.querySelector(".message").textContent = "💥 You lost ";
     }
   }
 };
@@ -40,13 +33,13 @@ let checkButtonFunction = function() {
 let againFunction = function() {
   count = 20;
   secretNumber = Math.trunc(Math.random() * 21);
-  document.querySelector('.number').textContent = '?';
-  document.querySelector('.guess').value = '';
-  document.querySelector('.number').style.width = '15rem';
-  document.querySelector('body').style.backgroundColor = '#222';
-  document.querySelector('.message').textContent = 'Start guessing..';
-  document.querySelector('.score').textContent = count;
+  document.querySelector(".number").textContent = "?";
+  document.querySelector(".guess").value = "";
+  document.querySelector(".number").style.width = "15rem";
+  document.querySelector("body").style.backgroundColor = "#222";
+  document.querySelector(".message").textContent = "Start guessing..";
+  document.querySelector(".score").textContent = count;
 };
 
-document.querySelector('.check').addEventListener('click', checkButtonFunction);
-document.querySelector('.again').addEventListener('click', againFunction);
+document.querySelector(".check").addEventListener("click", checkButtonFunction);
+document.querySelector(".again").addEventListener("click", againFunction);
